@@ -32,7 +32,40 @@ namespace CadastroPessoa.Classes
         }
         public bool ValidarDataNasc(DateTime dataNasc)
         {
-            throw new NotImplementedException();
+            DateTime dataAtual = DateTime.Today;
+
+            double anos = (dataAtual - dataNasc).TotalDays / 365;
+
+            if (anos >= 18)
+            {
+                return true;
+            }
+
+            return false;
         }
+
+        public bool ValidarDataNasc(string dataNasc)
+        {
+            
+            if (DateTime.TryParse(dataNasc, out DateTime dataCovertida) == true)
+            {
+                DateTime dataAtual = DateTime.Today;
+
+                double anos = (dataAtual - dataCovertida).TotalDays / 365;
+
+                Console.WriteLine(anos);
+
+                if (anos >= 18)
+                {
+                    return true;
+                }
+
+                return false;
+                
+            }
+
+            return false;
+        }
+        
     }
 }
