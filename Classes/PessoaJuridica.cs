@@ -11,8 +11,8 @@ namespace CadastroPessoa.Classes
 
         public string caminho { get; private set; } = "Database/PessoaJuridica.csv";
 
-
         public override float CalcularImposto(float rendimento)
+        
         {
             if (rendimento <= 3000)
             {

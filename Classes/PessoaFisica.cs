@@ -8,6 +8,8 @@ namespace CadastroPessoa.Classes
 
         public DateTime dataNasc { get; set; }
 
+        public string caminho { get; private set; } = "Database/PessoaFisica.csv";
+
         public override float CalcularImposto(float rendimento)
         {
             if (rendimento <= 1500)
@@ -65,6 +67,39 @@ namespace CadastroPessoa.Classes
             }
 
             return false;
+        }
+
+        public void Inserir(PessoaFisica pf) {
+            Utils.VerificarPastaArquivo(caminho);
+
+            string[] pfValores = {$"{pf.nome}, {pf.cpf}, {pf.rendimento}, {pf.endereco.logradouro}, {pf.endereco.numero}, {pf.endereco.complemento}"};
+
+            File.AppendAllLines(caminho, pfValores);
+        }
+
+        public List<PessoaFisica> LerArquivo(){
+            List<PessoaFisica> listaPf = new List<PessoaFisica>();
+
+            string[] linhas = File.ReadAllLines(caminho);
+
+            // Fabio, 04.900.240/0001-01,Razao Social Pj
+            // nome, cnpj, razaoSocial
+            // 0, 1, 2
+            foreach (string cadaLinha in linhas)
+            {
+                string[] atributos = cadaLinha.Split(",");
+
+                PessoaFisica novaPf = new PessoaFisica();
+
+                novaPf.nome = atributos[0];
+                novaPf.cpf = atributos [1];
+                novaPf.rendimento = int.Parse(atributos[2]);
+                
+                listaPf.Add(novaPf);
+
+            }
+            
+            return listaPf;
         }
         
     }

@@ -1,8 +1,5 @@
 ﻿using CadastroPessoa.Classes;
 
-PessoaFisica metodosPf = new PessoaFisica();
-List<PessoaFisica> listaPf = new List<PessoaFisica>();
-
 Console.Clear();
 Console.BackgroundColor = ConsoleColor.Cyan;
 Console.ForegroundColor = ConsoleColor.Black;
@@ -54,6 +51,7 @@ do
 ");
                 opcaoPf = Console.ReadLine();
 
+                PessoaFisica metodosPf = new PessoaFisica();
                 switch (opcaoPf)
                 {
                     case "1":
@@ -122,6 +120,8 @@ do
                         }
 
                         novaPf.endereco = novoEndPf;
+
+                        metodosPf.Inserir(novaPf);
                         
                         // listaPf.Add(novaPf);
 
@@ -134,17 +134,17 @@ do
                         
 
                         // Enquanto usar o SW não fecha
-                        using (StreamWriter sw = new StreamWriter($"{novaPf.nome}.txt"))
-                        {
-                            sw.WriteLine(@$"
-                            Nome: {novaPf.nome}
-                            Endereço: {novaPf.endereco.logradouro}, {novaPf.endereco.numero}
-                            Data de nascimento: {novaPf.dataNasc.ToString("d")}
-                            Rendimento: {novaPf.rendimento.ToString("C")}
-                            Imposto a ser pago: {metodosPf.CalcularImposto(novaPf.rendimento).ToString("C")}"
-                            );
-                            // Depois que não tem mais nada sendo usado pelo recurso (SW) ele fecha
-                        }
+                        // using (StreamWriter sw = new StreamWriter($"{novaPf.nome}.txt"))
+                        // {
+                        //     sw.WriteLine(@$"
+                        //     Nome: {novaPf.nome}
+                        //     Endereço: {novaPf.endereco.logradouro}, {novaPf.endereco.numero}
+                        //     Data de nascimento: {novaPf.dataNasc.ToString("d")}
+                        //     Rendimento: {novaPf.rendimento.ToString("C")}
+                        //     Imposto a ser pago: {metodosPf.CalcularImposto(novaPf.rendimento).ToString("C")}"
+                        //     );
+                        //     // Depois que não tem mais nada sendo usado pelo recurso (SW) ele fecha
+                        // }
 
                         Console.ForegroundColor = ConsoleColor.DarkGreen;
                         Console.WriteLine($"Cadastro realizado com sucesso");
@@ -180,14 +180,26 @@ do
                             
 //                         }
 
-                        using (StreamReader sr = new StreamReader("Diogo.txt"))
-                        {
-                            string linha;
+                        // using (StreamReader sr = new StreamReader("Diogo.txt"))
+                        // {
+                        //     string linha;
 
-                            while ((linha = sr.ReadLine()) != null)
-                            {
-                                Console.WriteLine($"{linha}");
-                            }
+                        //     while ((linha = sr.ReadLine()) != null)
+                        //     {
+                        //         Console.WriteLine($"{linha}");
+                        //     }
+                        // }
+
+                        List<PessoaFisica> listaExibicaoPf = metodosPf.LerArquivo();
+
+                        foreach (PessoaFisica cadaItem in listaExibicaoPf)
+                        {
+                            Console.Clear();
+                            Console.WriteLine(@$"
+Nome: {cadaItem.nome}
+CPF: {cadaItem.cpf}
+Rendimento: {cadaItem.rendimento.ToString("C")}
+            ");
                         }
 
                         Console.WriteLine($"Aperte 'Enter' para continuar...");
@@ -321,50 +333,50 @@ do
 
                         novaPj.endereco = novoEndPj;
 
-                        // metodosPj.Inserir(novaPj);
+                        metodosPj.Inserir(novaPj);
 
-                        using (StreamWriter sw = new StreamWriter("Diogo.txt"))
-                        {
-                            sw.WriteLine(@$"
-                            Nome: {novaPj.nome}
-                            Endereço: {novaPj.endereco.logradouro}, {novaPj.endereco.numero}
-                            Rendimento: {novaPj.rendimento.ToString("C")}
-                            Imposto a ser pago: {metodosPf.CalcularImposto(novaPj.rendimento).ToString("C")}"
-                            );
+                        // using (StreamWriter sw = new StreamWriter("Diogo.txt"))
+                        // {
+                        //     sw.WriteLine(@$"
+                        //     Nome: {novaPj.nome}
+                        //     Endereço: {novaPj.endereco.logradouro}, {novaPj.endereco.numero}
+                        //     Rendimento: {novaPj.rendimento.ToString("C")}
+                        //     Imposto a ser pago: {metodosPf.CalcularImposto(novaPj.rendimento).ToString("C")}"
+                        //     );
 
-                        Console.Clear();
-                        Console.ForegroundColor = ConsoleColor.DarkGreen;
-                        Console.WriteLine($"Cadastro realizado com sucesso");
-                        Console.ResetColor();
-                        Thread.Sleep(3000);
+                        // Console.Clear();
+                        // Console.ForegroundColor = ConsoleColor.DarkGreen;
+                        // Console.WriteLine($"Cadastro realizado com sucesso");
+                        // Console.ResetColor();
+                        // Thread.Sleep(3000);
 
-                        }
+                        // }
                         break;
                     case "2":
                         
 
-//                         List<PessoaJuridica> listaExibicaoPj = metodosPj.LerArquivo();
+                        List<PessoaJuridica> listaExibicaoPj = metodosPj.LerArquivo();
 
-//                         foreach (PessoaJuridica cadaItem in listaExibicaoPj)
-//                         {
-//                             Console.Clear();
-//                             Console.WriteLine(@$"
-// Nome: {cadaItem.nome}
-// Razão Social: {cadaItem.razaoSocial}
-// CNPJ: {cadaItem.cnpj}
-// Rendimento: {cadaItem.rendimento.ToString("C")}
-// CNPJ: {cadaItem.cnpj}
-//             ");
+                        foreach (PessoaJuridica cadaItem in listaExibicaoPj)
+                        {
+                            Console.Clear();
+                            Console.WriteLine(@$"
+Nome: {cadaItem.nome}
+Razão Social: {cadaItem.razaoSocial}
+CNPJ: {cadaItem.cnpj}
+Rendimento: {cadaItem.rendimento.ToString("C")}
+            ");
+                        }
 
-                            using (StreamReader sr = new StreamReader("Diogo.txt"))
-                            {
-                                string linha;
+                            // using (StreamReader sr = new StreamReader("Diogo.txt"))
+                            // {
+                            //     string linha;
 
-                                while ((linha = sr.ReadLine()) != null)
-                                {
-                                    Console.WriteLine($"{linha}");
-                                }
-                            }
+                            //     while ((linha = sr.ReadLine()) != null)
+                            //     {
+                            //         Console.WriteLine($"{linha}");
+                            //     }
+                            // }
 
                             Console.WriteLine($"Aperte 'ENTER' para continuar");
                             Console.ReadLine();
@@ -416,32 +428,6 @@ do
 
 
 } while (opcao != "0");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
