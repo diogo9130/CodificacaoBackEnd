@@ -26,7 +26,7 @@
 
 # Execução da aplicação
 * Instalação do Visual Studio Code (https://code.visualstudio.com/)
-* Faça o download desse repositorio (https://github.com/BrendoAlmeida/SenaiAtividades/tree/main/SA2/ER8/ProjetoUC9)
+* Faça o download desse repositorio (https://github.com/diogo9130/CodificacaoBackEnd)
 * Abra o Visual Studio Code no projeto
 * Abra o terminal e digite dotnet run
 
